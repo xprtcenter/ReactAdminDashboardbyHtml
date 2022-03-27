@@ -1,0 +1,236 @@
+.table-box {
+	position: relative;
+	width: 100%;
+	padding: 20px;
+	display: grid;
+	grid-template-columns: 2fr 1fr;
+	grid-gap: 0.5rem;
+	margin-top: 0.2rem;
+}
+
+.table-box .custom-table {
+	background: var(--white);
+	padding: 1rem;
+	box-shadow: 0 7px 25px rgba(0, 0, 0, 0.192);
+	border-radius: 10px;
+	margin: 0 5px;
+}
+.custom-table .cardHeader {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.cardHeader h3 {
+	font-weight: 600;
+	color: var(--blue);
+}
+.btn {
+	position: relative;
+	padding: 5px 10px;
+	background: var(--blue);
+	text-decoration: none;
+	color: var(--white);
+	border-radius: 6px;
+}
+.btn:hover {
+	background: var(--blue2);
+}
+.table-box .custom-table table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 10px;
+}
+.table-box .custom-table table thead th,
+.table-box .custom-table table tbody td {
+	padding: 0.3rem 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	text-align: start;
+}
+
+.table-box .custom-table table tbody tr:hover {
+	background: var(--blue);
+	color: var(--white);
+}
+
+.table-box .custom-table table tr th:last-child,
+.table-box .custom-table table tr td:last-child {
+	text-align: end;
+}
+
+.btn {
+	padding: 2px 4px;
+	cursor: pointer;
+	border-radius: 4px;
+	font-size: 14px;
+	font-weight: 500;
+}
+.btn.edit {
+	background: var(--orange);
+	border: 2px solid var(--white);
+	color: var(--white);
+	margin: 0 2px;
+}
+
+.btn.view {
+	background: var(--blue);
+	border: 2px solid var(--white);
+	color: var(--white);
+	margin: 0 2px;
+}
+.btn.print {
+	background: var(--green);
+	border: 2px solid var(--white);
+	color: var(--white);
+	margin: 0 2px;
+}
+
+.dropdown-btn {
+	padding: 6px 8px 6px 16px;
+	text-decoration: none;
+	font-size: 20px;
+	color: #818181;
+	display: block;
+	border: none;
+	background: none;
+	width: 100%;
+	text-align: left;
+	cursor: pointer;
+	outline: none;
+}
+
+.dropdown-container {
+	display: none;
+	background-color: #262626;
+	padding-left: 8px;
+}
+.pat-card {
+	background: var(--white);
+	border-radius: 10px;
+	display: flex;
+	justify-content: flex-start;
+
+	box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+	margin-top: 15px;
+}
+
+.pat-card .imgBx {
+	width: 60px;
+	height: 65px;
+	border-radius: 20%;
+	overflow: hidden;
+	margin-right: 15px;
+}
+
+.pat-card .imgBx img {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.pat-card .nameBox {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+}
+.pat-card .nameBox h4 {
+	font-size: 1rem;
+	margin: 0.2rem 0;
+}
+.pat-card .nameBox span {
+	font-size: 1rem;
+	margin: 0.2rem 0;
+}
+
+/* Model Form Style Code */
+
+.modal-cover {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 10;
+	transform: translateZ(0);
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-area {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	padding: 2.5em 1.5em 1.5em 1.5em;
+	background-color: #ffffff;
+	box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.1);
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+._modal-close {
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 0.5em;
+	line-height: 1;
+	background: #f6f6f7;
+	border: 0;
+	box-shadow: 0;
+	cursor: pointer;
+}
+
+._modal-close-icon {
+	width: 25px;
+	height: 25px;
+	fill: transparent;
+	stroke: black;
+	stroke-linecap: round;
+	stroke-width: 2;
+}
+
+.modal-body {
+	padding-top: 0.25em;
+}
+._hide-visual {
+	border: 0 !important;
+	clip: rect(0 0 0 0) !important;
+	height: 1px !important;
+	margin: -1px !important;
+	overflow: hidden !important;
+	padding: 0 !important;
+	position: absolute !important;
+	width: 1px !important;
+	white-space: nowrap !important;
+}
+
+.scroll-lock {
+	overflow: hidden;
+	margin-right: 17px;
+}
+.form-group {
+	display: flex;
+	flex-direction: column;
+}
+.form-group .form-control {
+	width: 15rem;
+	margin: 5px 0;
+	font-size: 15px;
+	padding: 2px 5px;
+	border-radius: 10px;
+}
+.form-title {
+	margin-bottom: 5px;
+	text-align: center;
+	color: var(--blue);
+}
+@media screen and (min-width: 500px) {
+	/* Center the Modal! */
+	.modal-area {
+		left: 50%;
+		top: 50%;
+		height: auto;
+		transform: translate(-50%, -50%);
+		max-width: 18em;
+		max-height: calc(100% - 1em);
+	}
+}
