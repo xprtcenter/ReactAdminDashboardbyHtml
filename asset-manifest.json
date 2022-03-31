@@ -1,13 +1,14 @@
 {
   "files": {
-    "main.css": "/ReactAdminDashboardbyHtml/static/css/main.1a12276b.css",
-    "main.js": "/ReactAdminDashboardbyHtml/static/js/main.db129d49.js",
+    "main.css": "/ReactAdminDashboardbyHtml/static/css/main.3379fb4c.css",
+    "main.js": "/ReactAdminDashboardbyHtml/static/js/main.dc026036.js",
+    "static/media/swami.png": "/ReactAdminDashboardbyHtml/static/media/swami.808446dcddcda7a650b6.png",
     "index.html": "/ReactAdminDashboardbyHtml/index.html",
-    "main.1a12276b.css.map": "/ReactAdminDashboardbyHtml/static/css/main.1a12276b.css.map",
-    "main.db129d49.js.map": "/ReactAdminDashboardbyHtml/static/js/main.db129d49.js.map"
+    "main.3379fb4c.css.map": "/ReactAdminDashboardbyHtml/static/css/main.3379fb4c.css.map",
+    "main.dc026036.js.map": "/ReactAdminDashboardbyHtml/static/js/main.dc026036.js.map"
   },
   "entrypoints": [
-    "static/css/main.1a12276b.css",
-    "static/js/main.db129d49.js"
+    "static/css/main.3379fb4c.css",
+    "static/js/main.dc026036.js"
   ]
 }
