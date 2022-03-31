@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import PatientRegistration from "./components/opd/patientRegistration.component";
 import Sidebar from "./components/Dashboard/sidebar/sidebar.component";
 import Topbar from "./components/Dashboard/topbar/topbar.component";
-import TempDashboard from "./components/Dashboard/tempDashboard";
+import Dashboard from "./components/Dashboard/dashboard";
 
 function App() {
 	const [sidebarstate, setSidebarState] = useState(false);
@@ -21,7 +21,7 @@ function App() {
 
 				<Routes>
 					<Route path="/patientreg" element={<PatientRegistration />} />
-					<Route path="/tempdashboard" element={<TempDashboard />} />
+					<Route path="/" element={<Dashboard />} />
 				</Routes>
 			</div>
 		</div>

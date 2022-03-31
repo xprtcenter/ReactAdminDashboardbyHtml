@@ -20,7 +20,7 @@
 
 .patDetaildBox .card .cardName {
 	margin: 0 20px;
-	font-size: small;
+	font-size: 2rem;
 }
 .patDetaildBox .card:hover {
 	background: var(--blue);

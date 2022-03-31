@@ -1,3 +1,30 @@
+.search {
+	width: 300px;
+	margin: 0 10px;
+}
+
+.search label {
+	position: relative;
+	width: 100%;
+}
+.search label input {
+	width: 100%;
+	height: 30px;
+	border-radius: 40px;
+	padding: 5px 20px;
+	outline: none;
+	padding-left: 35px;
+	font-size: 1em;
+	border: 1px solid var(--black2);
+}
+
+.search label ion-icon {
+	position: absolute;
+	top: 0;
+	left: 10px;
+	font-size: 1.2em;
+}
+
 .table-box {
 	position: relative;
 	width: 100%;
@@ -21,49 +48,73 @@
 	align-items: center;
 }
 .cardHeader h3 {
-	font-weight: 600;
+	/* 	font-weight: 600; */
 	color: var(--blue);
 }
 .btn {
-	position: relative;
-	padding: 5px 10px;
 	background: var(--blue);
 	text-decoration: none;
 	color: var(--white);
-	border-radius: 6px;
+	border: 1px solid var(--white);
+	border-radius: 5px;
+	padding: 2px 4px;
+	cursor: pointer;
+	/* font-size: 0.9rem;
+	font-weight: 200; */
 }
 .btn:hover {
 	background: var(--blue2);
+}
+
+tbody tr td ion-icon {
+	position: relative;
+	top: 5px;
+
+	font-size: 1.2rem;
+	color: red;
+	margin-right: 3px;
+}
+tbody tr:hover ion-icon {
+	color: rgb(253, 253, 253);
+	cursor: pointer;
 }
 .table-box .custom-table table {
 	width: 100%;
 	border-collapse: collapse;
 	margin-top: 10px;
+	font-size: 0.8rem;
 }
 .table-box .custom-table table thead th,
 .table-box .custom-table table tbody td {
-	padding: 0.3rem 0;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	/* padding: 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1); */
 	text-align: start;
 }
-
+.table-box .custom-table table tbody tr td:first-child,
+.table-box .custom-table table tbody tr td:first-child {
+	padding-left: 5px;
+}
+.table-box .custom-table table tbody tr {
+	cursor: pointer;
+	height: 4vh;
+}
 .table-box .custom-table table tbody tr:hover {
 	background: var(--blue);
 	color: var(--white);
 }
-
 .table-box .custom-table table tr th:last-child,
 .table-box .custom-table table tr td:last-child {
 	text-align: end;
+	position: relative;
+	justify-content: center;
+}
+.table-box .custom-table table#opd-table tr th:last-child,
+.table-box .custom-table table#opd-table tr td:last-child {
+	text-align: end;
+	position: relative;
+	justify-content: center;
 }
 
-.btn {
-	padding: 2px 4px;
-	cursor: pointer;
-	border-radius: 4px;
-	font-size: 14px;
-	font-weight: 500;
-}
 .btn.edit {
 	background: var(--orange);
 	border: 2px solid var(--white);
@@ -133,12 +184,12 @@
 	grid-template-columns: repeat(2, 1fr);
 }
 .pat-card .nameBox h4 {
-	font-size: 1rem;
+	font-size: 0.8rem;
 	margin: 0.2rem 0;
 }
 .pat-card .nameBox span {
-	font-size: 1rem;
-	margin: 0.2rem 0;
+	font-size: 0.8rem;
+	margin: 0.2rem 0.3rem;
 }
 
 /* Model Form Style Code */
@@ -213,15 +264,30 @@
 }
 .form-group .form-control {
 	width: 15rem;
+	height: 2rem;
 	margin: 5px 0;
 	font-size: 15px;
 	padding: 2px 5px;
-	border-radius: 10px;
+	border-radius: 8px;
 }
+
 .form-title {
 	margin-bottom: 5px;
 	text-align: center;
 	color: var(--blue);
+}
+.btn-submit {
+	width: 100px;
+	background-color: var(--blue);
+	color: var(--white);
+	border-radius: 8px;
+	cursor: pointer;
+	align-self: center;
+	height: 30px;
+	margin-top: 15px;
+}
+.btn-submit:hover {
+	background-color: var(--blue2);
 }
 @media screen and (min-width: 500px) {
 	/* Center the Modal! */

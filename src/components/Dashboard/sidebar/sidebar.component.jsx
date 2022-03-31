@@ -18,7 +18,7 @@ const Sidebar = () => {
 				</li>
 				<li className={sidemenuactive === "Dashboard" ? "hovered" : null}>
 					<Link
-						to="/tempdashboard"
+						to="/"
 						onClick={() => {
 							setSidemenuActive("Dashboard");
 						}}

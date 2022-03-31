@@ -1,32 +1,53 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import "./opd-visit-styles.css";
 import "../form-setting/forms.styles.css";
-import { Link } from "react-router-dom";
-import PatientRegistrationForm from "./pat-registration-form.component";
+import Container from "../model-component/container.component";
+import PatientVisitAddForm from "./pat-visit-add-form.component";
+import http from "../http-common";
+import Moment from "moment";
 
-const OpdVisit = () => {
+const OpdVisit = (selectedPatent) => {
+	console.log("Patient from OPDVisit", selectedPatent);
+	const [data, setData] = useState({});
+	const [patientVisitList, setPatientVisitList] = useState([]);
+
+	console.log("Patient from data", data);
+
+	useEffect(() => {
+		setData(selectedPatent.selectedPatent);
+		getPatientVisitList(data.id);
+	}, [selectedPatent, data]);
+
+	const getPatientVisitList = (id) => {
+		http.get(`/patvisit/${id}`).then((response) => {
+			console.log("patient visit details recive from server", response.data);
+			setPatientVisitList(response.data);
+		});
+	};
+
 	return (
 		<Fragment>
 			<div className="custom-table">
 				<div className="cardHeader">
 					<h3>Patient OPD visit</h3>
-					<Link to="/all" className="btn">
-						Add visit
-					</Link>
+					<Container
+						Form={PatientVisitAddForm}
+						triggerText="Add Visit"
+						btnstyle="btn add"
+						id={data}
+					/>
 				</div>
 				<div className="pat-card">
 					<div className="imgBx">
 						<img src="img/img8.jpg" alt="" />
 					</div>
 					<div className="nameBox">
-						<h4>Patient uID :</h4>
-						<span>1221454GHGHGS45</span>
 						<h4>Patient Name :</h4>
-						<span>Rajeev Sharma</span>
+						<span>{data.patientname}</span>
 						<h4>Gaurdian Name :</h4>
-						<span>Anuradha Sharma</span>
+						<span>{data.guardianname}</span>
 						<h4>Age :</h4>
-						<span>32 years</span>
+						<span>{data.age}</span>
 					</div>
 				</div>
 
@@ -39,62 +60,17 @@ const OpdVisit = () => {
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>05 March 2022</td>
-							<td>Dr Deepak Pradhan</td>
-							<td>
-								<span className="btn print">Print</span>
-							</td>
-						</tr>
-						<tr>
-							<td>03 Feb 2022</td>
-							<td>Dr Sanjeev Saxena</td>
-							<td>
-								<span className="btn print">Print</span>
-							</td>
-						</tr>
-						<tr>
-							<td>12 March 2022</td>
-							<td>Dr Rajeev Gupta</td>
-							<td>
-								<span className="btn print">Print</span>
-							</td>
-						</tr>
-						<tr>
-							<td>01 January 2022</td>
-							<td>Dr Deepak Pradhan</td>
-							<td>
-								<span className="btn print">Print</span>
-							</td>
-						</tr>
-						<tr>
-							<td>05 March 2022</td>
-							<td>Dr Deepak Pradhan</td>
-							<td>
-								<span className="btn print">Print</span>
-							</td>
-						</tr>
-						<tr>
-							<td>03 Feb 2022</td>
-							<td>Dr Sanjeev Saxena</td>
-							<td>
-								<span className="btn print">Print</span>
-							</td>
-						</tr>
-						<tr>
-							<td>12 March 2022</td>
-							<td>Dr Rajeev Gupta</td>
-							<td>
-								<span className="btn print">Print</span>
-							</td>
-						</tr>
-						<tr>
-							<td>01 January 2022</td>
-							<td>Dr Deepak Pradhan</td>
-							<td>
-								<span className="btn print">Print</span>
-							</td>
-						</tr>
+						{patientVisitList.map((visit) => {
+							return (
+								<tr key={visit.id}>
+									<td>{Moment(visit.visitDate).format("D MMM yyyy hh:mma")}</td>
+									<td>{visit.doc_name}</td>
+									<td>
+										<span className="btn print">Print</span>
+									</td>
+								</tr>
+							);
+						})}
 					</tbody>
 				</table>
 			</div>

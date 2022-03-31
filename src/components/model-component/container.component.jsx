@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Modal } from "./model-component";
-import TriggerButton from "./trigger-button";
+
 export class Container extends Component {
 	state = { isShown: false };
+
 	showModal = () => {
 		this.setState({ isShown: true }, () => {
 			this.closeButton.focus();
@@ -29,19 +30,24 @@ export class Container extends Component {
 	render() {
 		return (
 			<React.Fragment>
-				<TriggerButton
-					showModal={this.showModal}
-					buttonRef={(n) => (this.TriggerButton = n)}
-					triggerText={this.props.triggerText}
-				/>
+				<button
+					className={this.props.btnstyle}
+					ref={(n) => (this.TriggerButton = n)}
+					onClick={this.showModal}
+				>
+					{this.props.triggerText}
+				</button>
+
 				{this.state.isShown ? (
 					<Modal
-						onSubmit={this.props.onSubmit}
 						modalRef={(n) => (this.modal = n)}
 						buttonRef={(n) => (this.closeButton = n)}
 						closeModal={this.closeModal}
 						onKeyDown={this.onKeyDown}
 						onClickOutside={this.onClickOutside}
+						Form={this.props.Form}
+						id={this.props.id}
+						propdata={this.props.mydata}
 					/>
 				) : null}
 			</React.Fragment>

@@ -1,72 +1,78 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState, Fragment } from "react";
 import "../form-setting/forms.styles.css";
 import Moment from "moment";
 import OpdVisit from "./opd-visit-component";
 import http from "../http-common";
-import Container from "./model-component/container.component";
+import Container from "../model-component/container.component";
+import PatientRegistrationAddForm from "./pat-registration-add-form.component";
+import { confirm } from "react-confirm-box";
+
+import PatientRegistrationEditForm from "./pat-registration-edit-form";
 
 const PatientRegistration = () => {
-	const [patientList, setPatientList] = useState([
-		{
-			patientname: "",
-			age: "",
-			address: "",
-			guardianname: "",
-		},
-	]);
-	const [patientVisitList, setPatientVisitList] = useState([]);
-	const getPatient = () => {
+	const [patientList, setPatientList] = useState([]);
+	const fakedata = {};
+	const [selectedPatient, setSelectedPatient] = useState(fakedata);
+	const [serarchTerm, setSearchTerm] = useState("");
+	const getPatientList = () => {
 		http.get("/patreg").then((response) => {
 			console.log(response.data);
 			setPatientList(response.data);
 		});
 	};
-	const getPatientVisit = () => {
-		http.get("/patvisit").then((response) => {
+
+	const patDelete = (id) => {
+		http.delete(`/patreg/delete/${id}`).then((response) => {
 			console.log(response.data);
-			setPatientVisitList(response.data);
+			getPatientList();
 		});
 	};
+
+	const onClickConfirm = async (id) => {
+		const result = await confirm("Are you sure?");
+		if (result) {
+			console.log("You click yes!");
+			patDelete(id);
+			return;
+		}
+		console.log("You click No!");
+	};
+
+	const selectPatient = (id) => {
+		http
+			.get(`/patreg/${id}`)
+			.then((response) => setSelectedPatient(response.data[0]));
+	};
+
 	useEffect(() => {
-		getPatient();
+		getPatientList();
 	}, []);
 
-	const addPatient = () => {
-		http
-			.post("/patreg/create", {
-				patientname: patientList.patientname,
-				age: patientList.age,
-				address: patientList.address,
-				guardianname: patientList.guardianname,
-			})
-			.then(() => {
-				setPatientList([
-					...patientList,
-					{
-						patientname: patientList.patientname,
-						age: patientList.age,
-						address: patientList.address,
-						guardianname: patientList.guardianname,
-					},
-				]);
-			});
-	};
 	return (
-		<>
+		<Fragment>
 			<div className="table-box">
 				<div className="custom-table">
 					<div className="cardHeader">
 						<h3>Patient Details</h3>
 						<div className="search">
 							<label>
-								<input type="text" placeholder="search patient here" />
+								<input
+									type="text"
+									placeholder="search patient here"
+									onChange={(e) => {
+										setSearchTerm(e.target.value);
+									}}
+								/>
 								<ion-icon name="search"></ion-icon>
 							</label>
 						</div>
-						<Container triggerText="New Registration" />
+						<Container
+							Form={PatientRegistrationAddForm}
+							triggerText="New Registration"
+							btnstyle="btn"
+						/>
 					</div>
-					<table>
+					<table id="opd-table">
 						<thead>
 							<tr>
 								<th>Registration Date</th>
@@ -74,39 +80,59 @@ const PatientRegistration = () => {
 								<th>Age</th>
 								<th>Guardian Name</th>
 								<th>Address</th>
+								<th>Mobile No.</th>
 								<th>Action</th>
 							</tr>
 						</thead>
 						<tbody>
-							{patientList.map((pat, idx) => {
-								return (
-									<tr key={idx}>
-										<td>{Moment(pat.regDate).format("D MMM yyyy hh:mma")}</td>
-										<td>{pat.patientname}</td>
-										<td>{pat.age}</td>
-										<td>{pat.guardianname}</td>
-										<td>{pat.address}</td>
+							{patientList
+								.filter((pat) => {
+									if (serarchTerm === "") {
+										return pat;
+									} else if (
+										pat.patientname
+											.toLowerCase()
+											.includes(serarchTerm.toLowerCase()) ||
+										pat.mobileno
+											.toLowerCase()
+											.includes(serarchTerm.toLowerCase())
+									) {
+										return pat;
+									}
+								})
+								.map((pat, idx) => {
+									return (
+										<tr key={idx} onClick={() => selectPatient(pat.id)}>
+											<td>{Moment(pat.regDate).format("D MMM yyyy hh:mma")}</td>
+											<td>{pat.patientname}</td>
+											<td>{pat.age}</td>
+											<td>{pat.guardianname}</td>
+											<td>{pat.address}</td>
+											<td>{pat.mobileno}</td>
 
-										<td>
-											<span className="btn edit">Edit</span>
-											<span
-												className="btn view"
-												onClick={() => {
-													getPatientVisit();
-												}}
-											>
-												View
-											</span>
-										</td>
-									</tr>
-								);
-							})}
+											<td>
+												<Container
+													Form={PatientRegistrationEditForm}
+													triggerText="Edit"
+													id={pat.id}
+													btnstyle="btn edit"
+												/>
+												<ion-icon
+													onClick={() => {
+														onClickConfirm(pat.id);
+													}}
+													name="trash"
+												></ion-icon>
+											</td>
+										</tr>
+									);
+								})}
 						</tbody>
 					</table>
 				</div>
-				<OpdVisit />
+				<OpdVisit selectedPatent={selectedPatient} />
 			</div>
-		</>
+		</Fragment>
 	);
 };
 
